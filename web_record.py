@@ -1,21 +1,28 @@
 import requests
 from html.parser import HTMLParser
 from datetime import date
+import re
 
 class web_record:
+
     def __init__(self, site, station, year, month):
-        version = web_record.__calc_version(year, month)
+        version = self.__calc_version(year, month)
         request_path = "https://forecast.weather.gov/product.php?site=" + str(site) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
         raw_request = requests.get(request_path)
-        parsed_request = web_record.__parse(raw_request.text)       
+        self.parsed_request = self.__parse(raw_request.text)       
 
-    def get_month():
+    def get_month(self):
         pass
 
-    def get_day(day):
+    def get_day(self, day):
         pass
 
-    def __calc_version(year, month):
+    def write_to_file(self, name):
+        with open(name, 'w') as file:
+            for each in self.parsed_request:
+                file.write(str(each) + '\n')
+
+    def __calc_version(self, year, month):
         today = date.today()
         year_month_prod_today = today.year * 12 + today.month
         year_month_prod_request = year * 12 + month
@@ -29,14 +36,30 @@ class web_record:
         else:
             return version
 
-    def __parse(raw):
-        content_start = "DY MAX MIN AVG DEP HDD CDD  WTR  SNW DPTH SPD SPD DIR MIN PSBL S-S WX    SPD DR\n================================================================================"
-        content_end = "================================================================================"
+    def __parse(self, raw):
+        reg_section = "==+"
+        reg_spaces = " +"
+        reg_EOL = "\n"
+        reg_macro = list()
 
-        content_body = raw.split(content_start)[1].split(content_end)[0]
-        print(content_body)
-        
+        reg_macro.append(re.split(reg_section, raw)[1].lstrip())
+        reg_macro.append(re.split(reg_section, raw)[2].lstrip())
 
-        
+        header_macro = re.split(reg_EOL, reg_macro[0])
+        body_macro = re.split(reg_EOL, reg_macro[1])
 
+        ret_list = list()
+        for count in range (0, len(header_macro)):
+            ret_list.append(re.split(reg_spaces, header_macro[count]))
 
+        for count in range (0, len(body_macro)):
+            ret_list.append(re.split(reg_spaces, body_macro[count]))
+
+        for row in ret_list:
+            for each in range (0, row.count("")):
+                row.remove("")
+            
+        for each in range (0, ret_list.count([])):
+            ret_list.remove([])
+
+        return ret_list
