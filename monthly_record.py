@@ -6,10 +6,13 @@ import re
 class record:
 
     def __init__(self, site, station, year, month):
+        self.load(site, station, year, month)
+
+    def load(self, site, station, year, month):
         version = self.__calc_version(year, month)
         request_path = "https://forecast.weather.gov/product.php?site=" + str(site) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
         raw_request = requests.get(request_path)
-        self.parsed_request = self.__parse(raw_request.text)       
+        self.parsed_request = self.__parse(raw_request.text) 
 
     def get_month(self):
         pass
