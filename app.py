@@ -1,5 +1,6 @@
 from monthly_record import record
 from weather_api.offices import offices
+from weather_api.stations import stations
 
 # record = record("fgf", "gfk", 2022, 7)
 # record.write_to_file("gfk2207.txt")
@@ -11,3 +12,5 @@ from weather_api.offices import offices
 
 office_list = offices().list()
 print(office_list)
+station_list = stations().list("FGF")
+print(station_list)
