@@ -1,4 +1,4 @@
-from monthly_record import record
+from weather_api.monthly_record import record
 from weather_api.offices import offices
 from weather_api.stations import stations
 
