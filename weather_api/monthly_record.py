@@ -1,5 +1,4 @@
 import requests
-from html.parser import HTMLParser
 from datetime import date
 import re
 
@@ -15,10 +14,12 @@ class record:
         self.parsed_request = self.__parse(raw_request.text) 
 
     def get_month(self):
-        pass
+        return self.parsed_request
 
     def get_day(self, day):
-        pass
+        if 1 <= day <= (len(self.parsed_request) - 1):
+            return self.parsed_request[day]
+        return []
 
     def write_to_file(self, name):
         with open(name, 'w') as file:
@@ -65,4 +66,4 @@ class record:
         for each in range (0, ret_list.count([])):
             ret_list.remove([])
 
-        return ret_list
+        return ret_list[2:]
