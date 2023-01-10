@@ -3,7 +3,7 @@
     color: blue;
 }
 .navbar {
-    background-color: lightslategray;
+    background-color: rgb(76, 151, 173);
     font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
@@ -21,8 +21,9 @@
 }
 
 .navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-left: 20px;
 }
 
 .body-content {
