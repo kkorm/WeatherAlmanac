@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block title %}
+Almanac
+{% endblock %}
+{% block content %}
+<p>Your results for weather station {{ station }} for {{ month }} of {{ year }}:</p>
+<p>{{  print_table()  }}</p>
+{% endblock %}
