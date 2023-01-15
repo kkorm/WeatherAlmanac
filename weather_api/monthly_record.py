@@ -8,7 +8,7 @@ class record:
         self.load(site, station, year, month)
 
     def load(self, site, station, year, month):
-        version = self.__calc_version(year, month)
+        version = self.__calc_version(int(year), int(month))
         request_path = "https://forecast.weather.gov/product.php?site=" + str(site) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
         raw_request = requests.get(request_path)
         self.parsed_request = self.__parse(raw_request.text) 
@@ -46,15 +46,18 @@ class record:
         reg_EOL = "\n"
         reg_macro = list()
 
-        reg_macro.append(re.split(reg_section, raw)[1].lstrip())
+        #reg_macro.append(re.split(reg_section, raw)[1].lstrip())
         reg_macro.append(re.split(reg_section, raw)[2].lstrip())
 
-        header_macro = re.split(reg_EOL, reg_macro[0])
-        body_macro = re.split(reg_EOL, reg_macro[1])
+        #header_macro = re.split(reg_EOL, reg_macro[0])
+        #body_macro = re.split(reg_EOL, reg_macro[1])
+        body_macro = re.split(reg_EOL, reg_macro[0])
 
         ret_list = list()
-        for count in range (0, len(header_macro)):
-            ret_list.append(re.split(reg_spaces, header_macro[count]))
+        # for count in range (0, len(header_macro)):
+        #     ret_list.append(re.split(reg_spaces, header_macro[count]))
+        ret_list.append(["Day", "Max Temp", "Min Temp", "Avg Temp", "Temp Dep", "Temp HDD", "Temp CDD", "Precip Watr Eq", "Precip Snow", "Precip Snow Depth", "Wind Avg", 
+        "Wind Max", "Wind Dir", "Wind Min", "PSBL", "S-S", "WX", "SPD", "DR"])
 
         for count in range (0, len(body_macro)):
             ret_list.append(re.split(reg_spaces, body_macro[count]))
@@ -66,4 +69,4 @@ class record:
         for each in range (0, ret_list.count([])):
             ret_list.remove([])
 
-        return ret_list[2:]
+        return ret_list        
