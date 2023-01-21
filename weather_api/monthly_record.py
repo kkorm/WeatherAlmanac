@@ -46,20 +46,15 @@ class record:
         reg_EOL = "\n"
         reg_macro = list()
 
-        #reg_macro.append(re.split(reg_section, raw)[1].lstrip())
         reg_macro.append(re.split(reg_section, raw)[2].lstrip())
-
-        #header_macro = re.split(reg_EOL, reg_macro[0])
-        #body_macro = re.split(reg_EOL, reg_macro[1])
         body_macro = re.split(reg_EOL, reg_macro[0])
 
         ret_list = list()
-        # for count in range (0, len(header_macro)):
-        #     ret_list.append(re.split(reg_spaces, header_macro[count]))
         ret_list.append(["Day", "Max Temp", "Min Temp", "Avg Temp", "Temp Dep", "Temp HDD", "Temp CDD", "Precip Watr Eq", "Precip Snow", "Precip Snow Depth", "Wind Avg", 
         "Wind Max", "Wind Dir", "Wind Min", "PSBL", "S-S", "WX", "SPD", "DR"])
 
         for count in range (0, len(body_macro)):
+            body_macro[count] = re.sub('\s{8}', '  --  ', body_macro[count])
             ret_list.append(re.split(reg_spaces, body_macro[count]))
 
         for row in ret_list:

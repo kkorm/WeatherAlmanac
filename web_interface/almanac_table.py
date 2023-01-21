@@ -10,11 +10,11 @@ class almanac_table:
 
     def get_html_string(self):
         rows_arr = len(self.arr)
-        cols_arr = len(self.arr[1])
         
         string_arr = []
         string_arr.append("<table><tr>")
         for row in range(0, rows_arr):
+            cols_arr = len(self.arr[row])
             for col in range(0, cols_arr):
                 string_arr.append("<td>" + self.arr[row][col] + "</td>")
             string_arr.append("</tr>")
