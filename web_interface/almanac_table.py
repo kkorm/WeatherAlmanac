@@ -20,11 +20,6 @@ class almanac_table:
             string_arr.append("</tr>")
         string_arr.append("</tr></table>")
         
-        #
-        # ! Make more efficient?? !#
-        #
-        string = ""
-        for each in string_arr:
-            string += each
+        string = "".join(string_arr)
         
         return string
