@@ -7,6 +7,8 @@ class offices:
         pass
 
     def list(self):
+        """Returns a list of NWS sites."""
+
         request_path = "https://api.weather.gov/offices/a" # Dummy path that provides error message with list of valid offices
         json_request = json.loads(requests.get(request_path).text)
         office_list = re.findall("[A-Z]{3}", str(json_request))

@@ -3,25 +3,51 @@ from datetime import date
 import re
 
 class record:
+    """
+    Record containing monthly data for a particular month and location.
+    
+    Basic usage:
+    >>> r = record.(site, station, year, month)
+    >>> month = r.get_month()
+    >>> day = r.get_day(day)
+    >>> write_to_file(filename)
+    """
 
     def __init__(self, site, station, year, month):
         self.load(site, station, year, month)
 
     def load(self, site, station, year, month):
+        """
+        Loads new monthly data.
+
+        :param site: NWS Site.
+        :param station: NWS Station.
+        :param year: Year of interest.
+        :param month: Month of interest.
+        """
         version = self.__calc_version(int(year), int(month))
         request_path = "https://forecast.weather.gov/product.php?site=" + str(site) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
         raw_request = requests.get(request_path)
         self.parsed_request = self.__parse(raw_request.text) 
 
     def get_month(self):
+        """Returns list with monthly data."""
+
         return self.parsed_request
 
     def get_day(self, day):
+        """Returns list with daily data."""
+
         if 1 <= day <= (len(self.parsed_request) - 1):
             return self.parsed_request[day]
         return []
 
     def write_to_file(self, name):
+        """
+        Writes monthly data to a file.
+
+        :param name: Filename.
+        """
         with open(name, 'w') as file:
             for each in self.parsed_request:
                 file.write(str(each) + '\n')
