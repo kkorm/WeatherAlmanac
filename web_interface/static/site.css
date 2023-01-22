@@ -37,14 +37,21 @@ table {
 
 th {
     border: 1px solid;
+    border-color: black;
     padding: 5px;
-    min-width: 40px;
+    width: 65px;
     text-align: center;
+    background-color: rgb(126, 126, 126);
+    color:rgb(238, 238, 238)
 }
 
 td {
     border: 1px solid;
     padding: 5px, 1px;
-    min-width: 40px;
+    width: 65px;
     text-align: center;
+}
+
+tr:nth-child(odd){
+    background-color:rgb(189, 189, 189)
 }
