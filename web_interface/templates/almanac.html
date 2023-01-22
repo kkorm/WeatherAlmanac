@@ -3,6 +3,6 @@
 Almanac
 {% endblock %}
 {% block content %}
-<p>Your results for weather station {{ station }} for {{ month }} of {{ year }}:</p>
+<p>Your results for weather station <strong>{{ station }}</strong> for <strong>{{ month }}</strong> of <strong>{{ year }}</strong>:</p>
 {{  print_table() | safe }}
 {% endblock %}

@@ -32,7 +32,13 @@ class almanac_table:
         
         string_arr = []
         string_arr.append("<table><tr>")
-        for row in range(0, rows_arr):
+        for row in range(0, 1):
+            cols_arr = len(self.arr[row])
+            for col in range(0, cols_arr):
+                string_arr.append("<th>" + self.arr[row][col] + "</th>")
+            string_arr.append("</tr>")
+            
+        for row in range(1, rows_arr):
             cols_arr = len(self.arr[row])
             for col in range(0, cols_arr):
                 string_arr.append("<td>" + self.arr[row][col] + "</td>")

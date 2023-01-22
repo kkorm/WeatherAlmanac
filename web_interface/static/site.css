@@ -3,7 +3,7 @@
     color: blue;
 }
 .navbar {
-    background-color: rgb(76, 151, 173);
+    background-color: rgb(61, 61, 61);
     font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
@@ -29,4 +29,22 @@
 .body-content {
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid;
+    padding: 5px;
+    min-width: 40px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid;
+    padding: 5px, 1px;
+    min-width: 40px;
+    text-align: center;
 }
