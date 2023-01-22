@@ -3,5 +3,15 @@
 Home
 {% endblock %}
 {% block content %}
-<p>Home page test.</p>
+<p>Welcome! To get started, select the NWS office from the dropdown for your desired observation station.</p>
+<form method="POST" action="{{url_for('pick_site')}}">
+    <label for="office">Choose NWS office: </label>
+    <select name = "office">
+        {% for office in offices %}
+            <option value="{{office}}" {% if loop.first %} SELECTED{% endif %}>{{office}}</option>
+        {%endfor %}
+    </select>
+    <input type="submit">
+    
+</form>
 {% endblock %}

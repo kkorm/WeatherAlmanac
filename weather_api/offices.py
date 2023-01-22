@@ -16,4 +16,5 @@ class offices:
             if re.fullmatch("[A-Z]{3}", each) == None:
                 return []
         office_list.remove("NWS")
+        office_list.sort()
         return office_list
