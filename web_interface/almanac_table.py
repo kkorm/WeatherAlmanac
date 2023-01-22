@@ -28,23 +28,26 @@ class almanac_table:
     def get_html_string(self):
         """Returns html string for monthly data."""
 
-        rows_arr = len(self.arr)
-        
-        string_arr = []
-        string_arr.append("<table><tr>")
-        for row in range(0, 1):
-            cols_arr = len(self.arr[row])
-            for col in range(0, cols_arr):
-                string_arr.append("<th>" + self.arr[row][col] + "</th>")
-            string_arr.append("</tr>")
+        if self.arr == ["invalid input"]:
+            return "<p>Invalid input format</p>"
+        else:
+            rows_arr = len(self.arr)
             
-        for row in range(1, rows_arr):
-            cols_arr = len(self.arr[row])
-            for col in range(0, cols_arr):
-                string_arr.append("<td>" + self.arr[row][col] + "</td>")
-            string_arr.append("</tr>")
-        string_arr.append("</tr></table>")
-        
-        string = "".join(string_arr)
-        
-        return string
+            string_arr = []
+            string_arr.append("<table><tr>")
+            for row in range(0, 1):
+                cols_arr = len(self.arr[row])
+                for col in range(0, cols_arr):
+                    string_arr.append("<th>" + self.arr[row][col] + "</th>")
+                string_arr.append("</tr>")
+                
+            for row in range(1, rows_arr):
+                cols_arr = len(self.arr[row])
+                for col in range(0, cols_arr):
+                    string_arr.append("<td>" + self.arr[row][col] + "</td>")
+                string_arr.append("</tr>")
+            string_arr.append("</tr></table>")
+            
+            string = "".join(string_arr)
+            
+            return string

@@ -14,12 +14,18 @@ def about():
 
 @app.route("/<office>/<station>/<year>/<month>")
 def almanac(office = None, station = None, year = None, month = None):
-    table = almanac_table(office, station, year, month)
-    date = datetime.date(int(year), int(month), 1)
-    return render_template(
-        "almanac.html",
-        station = station,
-        year = year,
-        month = date.strftime("%B"),
-        print_table = table.get_html_string
-    )
+    try:
+        table = almanac_table(office, station, year, month)
+        date = datetime.date(int(year), int(month), 1)
+    except:
+        return render_template(
+            "almanac_error.html",
+        )
+    else:
+        return render_template(
+            "almanac.html",
+            station = station,
+            year = year,
+            month = date.strftime("%B"),
+            print_table = table.get_html_string
+        )

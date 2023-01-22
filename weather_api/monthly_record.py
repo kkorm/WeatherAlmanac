@@ -26,10 +26,23 @@ class record:
         :param year: Year of interest.
         :param month: Month of interest.
         """
-        version = self.__calc_version(int(year), int(month))
-        request_path = "https://forecast.weather.gov/product.php?site=" + str(office) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
-        raw_request = requests.get(request_path)
-        self.parsed_request = self.__parse(raw_request.text) 
+
+        try:
+            office_re = re.fullmatch("[a-zA-Z]{3}", office)
+            station_re = re.fullmatch("[a-zA-Z]{3}", station)
+            year_re = re.fullmatch("[0-9]{4}", year)
+            month_re = re.fullmatch("[0-9][0-9]?", month)
+            
+            version = self.__calc_version(int(year), int(month))
+            if version < 0:
+                raise Exception("Invalid year value")
+        
+            request_path = "https://forecast.weather.gov/product.php?site=" + str(office) + "&issuedby=" + str(station) + "&product=CF6&format=txt&version=" + str(version) + "&glossary=0"
+            raw_request = requests.get(request_path)
+            self.parsed_request = self.__parse(raw_request.text) 
+        except:
+            self.parsed_request = ["invalid input"]
+        
 
     def get_month(self):
         """Returns list with monthly data."""
