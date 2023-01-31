@@ -3,6 +3,13 @@ import json
 import re
 
 class offices:
+    """
+    Class used to return list of NWS sites.
+    
+    Basic usage:
+    >>> offices = offices().list()
+    """
+
     def __init__(self):
         pass
 

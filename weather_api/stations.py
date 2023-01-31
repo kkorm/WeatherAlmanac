@@ -4,6 +4,13 @@ import re
 from weather_api.offices import offices
 
 class stations:
+    """
+    Class used to return list of NWS stations given a site.
+    
+    Basic usage:
+    >>> stations = stations().list(site)
+    """
+    
     def __init__(self):
         pass
 
