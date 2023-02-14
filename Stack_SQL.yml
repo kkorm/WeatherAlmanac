@@ -17,5 +17,11 @@ services:
     ports:
       - 8080:8080
 
+  weatheralmanac:
+    image: weatheralmanac:local
+    restart: always
+    ports:
+      - 8081:8081
+
 volumes:
   mysql: # Creates/uses volume at \data\docker\volumes
