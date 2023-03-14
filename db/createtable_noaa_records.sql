@@ -2,6 +2,8 @@ USE weather_records;
 
 CREATE TABLE IF NOT EXISTS noaa_records (
     id INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    year INT NOT NULL,
+    month TINYINT NOT NULL,
     day TINYINT NOT NULL,
     office_id VARCHAR(10) NOT NULL,
     station_id VARCHAR(10) NOT NULL,
