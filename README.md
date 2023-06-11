@@ -11,11 +11,20 @@ Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. 
 Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:tag .`, replacing `tag` with desired qualifier. Create the container using `docker run -p 127.0.0.1:hostport:8081/tcp weatheralmanac:tag`, replacing `hostport` and `tag` as appropriate.
 
 ## Run With Docker and With Datbase
-Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:local .`. Note that the tag is specified as `local` in this case. This can be changed, but the YAML file must match the same tag since a local build is being used. Copy the YAML file to a different directory and edit variables as required. Run `docker-compose -f Stack_SQL.yml up` to start the container. To teardown, run `docker-compose -f Stack_SQL.yml down`.
+Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:local .`. Note that the tag is specified as `local` in this case. This can be changed, but the YAML file must match the same tag since a local build is being used. Copy the YAML file to a different directory and edit variables as required. 
+
+Create a `.env` file in the project's root directory with the structure as shown below. Modify variables appropriately.
+`db_host="localhost"`
+`db_root_user="root"`
+`db_root_password="password"`
+`db_user="user"`
+`db_password="password"`
+`db_name="weather_records"`
+
+Run `docker-compose -f Stack_SQL.yml up -d` to start the container. To teardown, run `docker-compose -f Stack_SQL.yml down`.
 
 ## Future Improvements
 As this was used for educational purposes only, future improvements are unlikely. Obvious improvements could be made to the UI to make it more visually pleasing. More thorough vetting of upstream data from NWS could improve the user experience if inactive stations were removed.
 
 ## To DO
-- Update documentation and code to use .env for db credentials
 - Update code to write/read to/from database

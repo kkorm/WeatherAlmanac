@@ -3,13 +3,17 @@ version: '3.1'
 services:
 
   db:
+    env_file:
+      - .env
     image: mysql
     command: --default-authentication-plugin=caching_sha2_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: temppass
+      MYSQL_ROOT_PASSWORD: ${db_root_password}
     volumes:
       - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306 # Used for testing/external access only
 
   adminer:
     image: adminer
