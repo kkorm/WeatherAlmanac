@@ -8,6 +8,8 @@ requests = "*"
 flask = "*"
 waitress = "*"
 mysql-connector-python = "*"
+python-dotenv = "*"
+update = "*"
 
 [dev-packages]
 
