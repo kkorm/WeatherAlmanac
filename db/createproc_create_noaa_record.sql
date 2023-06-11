@@ -1,6 +1,7 @@
 DELIMITER $$
+USE weather_records $$
+DROP PROCEDURE IF EXISTS create_noaa_record $$
 
-DROP PROCEDURE IF EXISTS create_noaa_record;
 CREATE PROCEDURE create_noaa_record(
     day TINYINT,
     month TINYINT,
@@ -65,6 +66,6 @@ BEGIN
         wind_peak_speed,
         wind_peak_dir
     ) ;
-END$$
+END  $$
 
 DELIMITER ;
