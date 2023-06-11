@@ -15,3 +15,7 @@ Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. 
 
 ## Future Improvements
 As this was used for educational purposes only, future improvements are unlikely. Obvious improvements could be made to the UI to make it more visually pleasing. More thorough vetting of upstream data from NWS could improve the user experience if inactive stations were removed.
+
+## To DO
+- Update documentation and code to use .env for db credentials
+- Update code to write/read to/from database
