@@ -1,0 +1,4 @@
+Check latest date for given station and pull all records from then until current day
+Pull records from stations list and retrieve NWS records for those stations
+Create proper file structure
+Update documentation

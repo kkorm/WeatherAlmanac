@@ -5,4 +5,4 @@ Dockerfile
 Pipfile
 Pipfile.lock
 README.md
-Stack_SQL.yml
+docker-compose.yml

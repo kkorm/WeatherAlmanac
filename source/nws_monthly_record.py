@@ -71,7 +71,7 @@ class record:
         year_month_prod_today = today.year * 12 + today.month
         year_month_prod_request = year * 12 + month
 
-        version = year_month_prod_today - year_month_prod_request + 1
+        version = year_month_prod_today - year_month_prod_request
 
         if version <= 0:
             return -1
@@ -90,8 +90,8 @@ class record:
         body_macro = re.split(reg_EOL, reg_macro[0])
 
         ret_list = list()
-        ret_list.append(["Day", "Max Temp", "Min Temp", "Avg Temp", "Temp Dep", "Temp HDD", "Temp CDD", "Precip Watr Eq", "Precip Snow", "Precip Snow Depth", "Wind Avg", 
-        "Wind Max", "Wind Dir", "Wind Min", "PSBL", "S-S", "WX", "SPD", "DR"])
+        # ret_list.append(["Day", "Max Temp", "Min Temp", "Avg Temp", "Temp Dep", "Temp HDD", "Temp CDD", "Precip Watr Eq", "Precip Snow", "Precip Snow Depth", "Wind Avg", 
+        # "Wind Max", "Wind Dir", "Wind Min", "PSBL", "S-S", "WX", "SPD", "DR"])
 
         for count in range (0, len(body_macro)):
             body_macro[count] = re.sub('\s{8}', '  --  ', body_macro[count])

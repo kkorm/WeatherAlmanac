@@ -5,9 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "*"
-flask = "*"
-waitress = "*"
-mysql-connector-python = "*"
+requests_oauthlib = "*"
 python-dotenv = "*"
 update = "*"
 
