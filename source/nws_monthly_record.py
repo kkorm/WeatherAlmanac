@@ -71,7 +71,10 @@ class record:
         year_month_prod_today = today.year * 12 + today.month
         year_month_prod_request = year * 12 + month
 
-        version = year_month_prod_today - year_month_prod_request
+        if today.day == 1:
+            version = year_month_prod_today - year_month_prod_request
+        else:
+            version = year_month_prod_today - year_month_prod_request + 1
 
         if version <= 0:
             return -1

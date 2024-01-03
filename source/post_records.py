@@ -1,17 +1,9 @@
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
-import nws_monthly_record as nws_monthly_record
-import os
-from dotenv import load_dotenv
+import nws_monthly_record
+import corteza
 
-load_dotenv()
-client_id=os.getenv('corteza_client_id')
-client_secret=os.getenv('corteza_client_secret')
-
-client = BackendApplicationClient(client_id=client_id)
-oauth = OAuth2Session(client=client)
-token = oauth.fetch_token(token_url='https://corteza.keithkorman.com/auth/oauth2/token', client_id=client_id, client_secret=client_secret, scope='api')
-corteza_session = OAuth2Session(client_id, token=token)
+corteza = corteza.corteza()
 
 headers = {'accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json'}
 
@@ -36,5 +28,5 @@ for row in record.parsed_request:
                 '{"name":"Wind_Peak_Speed","value":"' + row[17] + '"},' \
                 '{"name":"Wind_Peak_Dir","value":"' + row[18] + '"}' \
             ']}'
-    request = corteza_session.post('https://corteza.keithkorman.com/api/compose/namespace/370633750091923458/module/370634812425240578/record/', headers=headers, data=data)
+    request = corteza.session.post('https://corteza.keithkorman.com/api/compose/namespace/370633750091923458/module/370634812425240578/record/', headers=headers, data=data)
     print(request.content)
