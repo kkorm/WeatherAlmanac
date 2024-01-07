@@ -9,6 +9,7 @@ class corteza:
     
     Basic usage:
     >>> corteza = corteza.corteza()
+    >>> corteza_session = corteza.session
     """
 
     def __init__(self):
