@@ -3,7 +3,7 @@ from requests_oauthlib import OAuth2Session
 import os
 from dotenv import load_dotenv
 
-class corteza:
+class instance:
     """
     Class containing Corteza authentication session/token
     
