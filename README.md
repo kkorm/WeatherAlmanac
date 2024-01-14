@@ -1,30 +1,21 @@
 # WeatherAlmanac
-Small website that scrapes data from the National Weather Service.
+Application that pulls weather data from NOAA and posts to a Corteza instance. Note that it is assumed that Corteza is already installed and configured.
 
 ## Purpose
-This project was initiated largely as a learning exercise to use a combination of Python (including Flask), HTML, CSS, and Docker. Basic structure was borrowed from https://code.visualstudio.com/docs/python/tutorial-flask. Data from this web application should be used for entertainment purposes only.
-
-## Run Standalone and Without Database
-Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Install dependencies using `pipenv install`. You may use the development server when running in debug mode in Visual Studio, or a production server can be spun up using Waitress. To use Waitress, use `pipenv run waitress-serve --listen=*:port web_interface.webapp:app`. Access the app at 127.0.0.1:port.
+This project was initiated largely as a learning exercise to use a combination of Python and Docker.
 
 ## Run With Docker and Without Datbase
-Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:tag .`, replacing `tag` with desired qualifier. Create the container using `docker run -p 127.0.0.1:hostport:8081/tcp weatheralmanac:tag`, replacing `hostport` and `tag` as appropriate.
+Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:local`. Note that the tag is specified as `local` in this case. This can be changed, but the YAML file must match the same tag since a local build is being used. 
 
-## Run With Docker and With Datbase
-Clone to desired directory `git clone https://github.com/kkorm/WeatherAlmanac`. Build docker image `docker build -t weatheralmanac:local .`. Note that the tag is specified as `local` in this case. This can be changed, but the YAML file must match the same tag since a local build is being used. Copy the YAML file to a different directory and edit variables as required. 
+## Local Test Runs
+For local test builds, install dependencies using `pipenv install`.
 
 Create a `.env` file in the project's root directory with the structure as shown below. Modify variables appropriately.
-`db_host="localhost"`
-`db_root_user="root"`
-`db_root_password="password"`
-`db_user="user"`
-`db_password="password"`
-`db_name="weather_records"`
+`corteza_client_id = ''`
+`corteza_client_secret = ''`
+`corteza_base_url = ''`
+`corteza_namespace_id = ''`
+`corteza_noaa_module_id = ''`
+`corteza_stations_module_id = ''`
 
-Run `docker-compose -f Stack_SQL.yml up -d` to start the container. To teardown, run `docker-compose -f Stack_SQL.yml down`.
-
-## Future Improvements
-As this was used for educational purposes only, future improvements are unlikely. Obvious improvements could be made to the UI to make it more visually pleasing. More thorough vetting of upstream data from NWS could improve the user experience if inactive stations were removed.
-
-## To DO
-- Update code to write/read to/from database
+Run `docker-compose up -d` to start the container. To teardown, run `docker-compose down`.
