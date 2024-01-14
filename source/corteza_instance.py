@@ -20,10 +20,11 @@ class instance:
             load_dotenv()
             client_id=os.getenv('corteza_client_id')
             client_secret=os.getenv('corteza_client_secret')
+            corteza_base_url=os.getenv('corteza_base_url')
 
             client = BackendApplicationClient(client_id=client_id)
             oauth = OAuth2Session(client=client)
-            token = oauth.fetch_token(token_url='https://corteza.keithkorman.com/auth/oauth2/token', client_id=client_id, client_secret=client_secret, scope='api')
+            token = oauth.fetch_token(token_url= corteza_base_url + '/auth/oauth2/token', client_id=client_id, client_secret=client_secret, scope='api')
             self.session = OAuth2Session(client_id, token=token)
         except:
             self.session = "Unable to authenticate"

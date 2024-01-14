@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 class stations:
     """
     Class containing last record for a given site in Corteza
@@ -11,8 +14,12 @@ class stations:
         self.__load(corteza)
 
     def __load(self, corteza):
+        load_dotenv()
+        corteza_base_url=os.getenv('corteza_base_url')
+        corteza_namespace_id=os.getenv('corteza_namespace_id')
+        corteza_stations_module_id=os.getenv('corteza_stations_module_id')
         headers = {'accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json'}
-        request = corteza.session.get("https://corteza.keithkorman.com/api/compose/namespace/370633750091923458/module/370633907495763970/record/", headers=headers)
+        request = corteza.session.get(corteza_base_url + '/api/compose/namespace/' + corteza_namespace_id + '/module/' + corteza_stations_module_id + '/record/', headers=headers)
         json = request.json()
 
         info = ('station', 'station_id', 'office')

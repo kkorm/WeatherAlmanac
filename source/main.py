@@ -3,9 +3,17 @@ import corteza_last_record
 import corteza_stations
 import noaa_records
 import datetime
+import os
+from dotenv import load_dotenv
+
 
 def post_records(station_records, each):
     try:
+        load_dotenv()
+        corteza_base_url=os.getenv('corteza_base_url')
+        corteza_namespace_id=os.getenv('corteza_namespace_id')
+        corteza_noaa_module_id=os.getenv('corteza_noaa_module_id')
+
         for day in station_records.json:
             data = '{"values":' \
                         '[{"name":"Station","value":"'+ each['station'] +'"},' \
@@ -16,7 +24,7 @@ def post_records(station_records, each):
                         '{"name":"Precip_Liquid","value":"'+ (day['PRCP'] if "PRCP" in day else '') +'"},' \
                         '{"name":"Precip_Snow","value":"'+ (day['SNOW'] if "SNOW" in day else '') +'"}' \
                     ']}'
-            request = corteza_inst.session.post('https://corteza.keithkorman.com/api/compose/namespace/370633750091923458/module/370634812425240578/record/', headers=headers, data=data)
+            request = corteza_inst.session.post(corteza_base_url + '/api/compose/namespace/' + corteza_namespace_id + '/module/' + corteza_noaa_module_id + '/record/', headers=headers, data=data)
     except:
         pass
 
