@@ -21,3 +21,6 @@ Create a `.env` file in the project's root directory with the structure as shown
 
 ### Start Docker Container
 Run `docker-compose up -d` to start the container. To teardown, run `docker-compose down`.
+
+## Find NOAA Weather Station IDs
+https://www.ncdc.noaa.gov/cdo-web/datatools/findstation
