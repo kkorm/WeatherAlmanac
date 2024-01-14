@@ -44,12 +44,12 @@ try:
             while year < (end_date.year - 10):
                 try:
                     station_records = noaa_records.records(each['station_id'], datetime.date(year,1,1).strftime('%Y-%m-%d'), datetime.date(year+9,12,31).strftime('%Y-%m-%d'))
-                    # post_records(station_records, each)
+                    post_records(station_records, each)
                 except:
                     pass
                 year += 10
             station_records = noaa_records.records(each['station_id'], datetime.date(year,1,1).strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
-            # post_records(station_records, each)            
+            post_records(station_records, each)            
         else:
             start_date = station_last_record.date + datetime.timedelta(days=1)
             if end_date >= start_date:

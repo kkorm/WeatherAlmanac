@@ -1,4 +1,6 @@
-FROM python:3-alpine
+FROM python:3
+
+RUN apt-get update && apt-get install -y cron
 
 RUN pip install --upgrade pip
 RUN pip install requests
@@ -8,6 +10,8 @@ RUN pip install python-dotenv
 RUN mkdir -p /home/weatheralmanac
 COPY . /home/weatheralmanac
 
-RUN crontab crontab
+RUN /usr/bin/crontab /home/weatheralmanac/crontab
 
 WORKDIR /home/weatheralmanac
+
+CMD ["cron", "-f"]

@@ -1,1 +1,1 @@
-0 8 * * * python /main.py >> /logfile
+0 0 * * * /usr/local/bin/python /home/weatheralmanac/source/main.py
