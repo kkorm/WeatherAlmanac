@@ -1,5 +1,8 @@
 FROM python:3
 
+ENV TZ="America/Chicago"
+RUN date
+
 RUN apt-get update && apt-get install -y cron
 
 RUN pip install --upgrade pip
