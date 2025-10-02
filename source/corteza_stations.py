@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 class stations:
     """
@@ -14,7 +13,6 @@ class stations:
         self.__load(corteza)
 
     def __load(self, corteza):
-        load_dotenv()
         corteza_base_url=os.getenv('corteza_base_url')
         corteza_namespace_id=os.getenv('corteza_namespace_id')
         corteza_stations_module_id=os.getenv('corteza_stations_module_id')
@@ -35,5 +33,5 @@ class stations:
                     elif element['name'] == 'Office':
                         temp['office'] = element['value']
                 self.list.append(temp)
-        except:
-            pass
+        except Exception as e:
+            raise e

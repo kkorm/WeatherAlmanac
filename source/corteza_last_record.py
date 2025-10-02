@@ -1,6 +1,5 @@
 import datetime
 import os
-from dotenv import load_dotenv
 
 class last_record:
     """
@@ -16,7 +15,6 @@ class last_record:
         self.__load(corteza, station)
 
     def __load(self, corteza, station):
-        load_dotenv()
         corteza_base_url=os.getenv('corteza_base_url')
         corteza_namespace_id=os.getenv('corteza_namespace_id')
         corteza_noaa_module_id=os.getenv('corteza_noaa_module_id')

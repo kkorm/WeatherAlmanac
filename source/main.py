@@ -4,12 +4,10 @@ import corteza_stations
 import noaa_records
 import datetime
 import os
-from dotenv import load_dotenv
 
 
 def post_records(station_records, each):
     try:
-        load_dotenv()
         corteza_base_url=os.getenv('corteza_base_url')
         corteza_namespace_id=os.getenv('corteza_namespace_id')
         corteza_noaa_module_id=os.getenv('corteza_noaa_module_id')
@@ -25,9 +23,10 @@ def post_records(station_records, each):
                         '{"name":"Precip_Snow","value":"'+ (day['SNOW'] if "SNOW" in day else '') +'"}' \
                     ']}'
             request = corteza_inst.session.post(corteza_base_url + '/api/compose/namespace/' + corteza_namespace_id + '/module/' + corteza_noaa_module_id + '/record/', headers=headers, data=data)
-    except:
-        pass
+    except Exception as e:
+        raise e
 
+print('Starting WeatherAlmanac sync.')
 corteza_inst = corteza_instance.instance()
 
 stations = corteza_stations.stations(corteza_inst).list
@@ -45,8 +44,9 @@ try:
                 try:
                     station_records = noaa_records.records(each['station_id'], datetime.date(year,1,1).strftime('%Y-%m-%d'), datetime.date(year+9,12,31).strftime('%Y-%m-%d'))
                     post_records(station_records, each)
-                except:
-                    pass
+                except Exception as e:
+                    print('Exception encountered. Error: %s', e)
+                    raise e
                 year += 10
             station_records = noaa_records.records(each['station_id'], datetime.date(year,1,1).strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
             post_records(station_records, each)            
@@ -55,5 +55,7 @@ try:
             if end_date >= start_date:
                 station_records = noaa_records.records(each['station_id'], start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
                 post_records(station_records, each)
-except:
-    pass
+except Exception as e:
+    print('Exception encountered. Error: %s', e)
+
+print('Successfully completed WeatherAlmanac sync.')

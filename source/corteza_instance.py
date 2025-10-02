@@ -1,7 +1,6 @@
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
 import os
-from dotenv import load_dotenv
 
 class instance:
     """
@@ -17,7 +16,6 @@ class instance:
 
     def __auth(self):
         try:
-            load_dotenv()
             client_id=os.getenv('corteza_client_id')
             client_secret=os.getenv('corteza_client_secret')
             corteza_base_url=os.getenv('corteza_base_url')
@@ -26,5 +24,5 @@ class instance:
             oauth = OAuth2Session(client=client)
             token = oauth.fetch_token(token_url= corteza_base_url + '/auth/oauth2/token', client_id=client_id, client_secret=client_secret, scope='api')
             self.session = OAuth2Session(client_id, token=token)
-        except:
-            self.session = "Unable to authenticate"
+        except Exception as e:
+            raise e
