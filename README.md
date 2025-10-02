@@ -7,7 +7,7 @@ This project was initiated largely as a learning exercise to use a combination o
 ## To setup:
 - Populate the `.env` file with the appropriate values, using `.env.template` as a starting point.
 - Run `make docker_startup`
-- Add the contents of `backblazescripts_cron.cron` to the host's cron via the command `crontab -e`.
+- Add the contents of `crontab` to the host's cron via the command `crontab -e`.
 
 ## Find NOAA Weather Station IDs
 https://www.ncdc.noaa.gov/cdo-web/datatools/findstation
